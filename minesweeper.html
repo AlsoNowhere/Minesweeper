@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="./lib/chive.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<h1>Minesweeper</h1>
+	</header>
+	<main>
+		<section>
+			<div class="card padding-large">
+				<p>X: {{sizeX}}</p>
+				<p>Y: {{sizeY}}</p>
+				<p>Mines: {{mines}}</p>
+				<div>
+					<label>
+						<span>Difficulty: {{current_difficulty}}</span>
+						<select (change)="change_difficulty" [value]="current_difficulty" #difficulty>
+							<option dill-for="difficulties" [value]="value">{{name}}</option>
+						</select>
+					</label>
+				</div>
+			</div>
+		</section>
+		<section>
+			<ul class="centred margin-bottom" #container [style]="container_styles">
+				<li class="relative inline-block card {{has_clicked}}" dill-for="grid" [style]="styles" (click)="update" (contextmenu)="right_click">
+					<span class="middle fa fa-flag tomato-text" dill-if="if_mine"></span>
+					<span class="middle" [style]="text_styles" dill-if="is_clicked">
+						<span dill-if="!is_mine">{{item}}</span>
+						<span class="fa fa-bomb" dill-if="is_mine"></span>
+					</span>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<div class="card padding-large" #mines_found>
+				<p>Mines remaining: {{found}}</p>
+			</div>
+		</section>
+		<section>
+			<div class="card padding-large">
+				<button type="button" class="orange" (click)="reset">Reset</button>
+			</div>
+		</section>
+		<section>
+			<div class="card padding-large" #result>
+				<p class="font-bold apple-text" dill-if="is_finished">You win!</p>
+				<p class="font-bold tomato-text" dill-if="game_over">Game over!</p>
+			</div>
+		</section>
+	</main>
+
+<!-- <script src="./lib/dill.js"></script> -->
+<script src="../../Projects/Spice Rack/Dill/dist/dill.js"></script>
+<script src="./src/minesweeper.js"></script>
+</body>
+</html>
